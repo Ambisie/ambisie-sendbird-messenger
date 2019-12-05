@@ -1,0 +1,34 @@
+.DS_Store
+
+# build
+build/server/
+build/tasks/
+build/static/*.js
+build/static/*.css
+build/static/*.html
+build/static/images/story-teller-avatars/
+build/lib
+
+# tooling and temp folders
+tmp/
+coverage/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+
+# vs code workspace settings
+.vscode/
