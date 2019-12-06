@@ -7,10 +7,11 @@ import { UserBlockModal } from './UserBlockModal';
 import { Chat } from '../Chat';
 
 class Message {
-  constructor({ channel, message }) {
-    this.channel = channel;
-    this.message = message;
-    this.element = this._createElement();
+  constructor({ channel, message, widgetContainerEl }) {
+    this.widgetContainerEl = widgetContainerEl;
+    this.channel           = channel;
+    this.message           = message;
+    this.element           = this._createElement();
   }
 
   _createElement() {
@@ -84,8 +85,9 @@ class Message {
     time.addEventListener('click', () => {
       if (isCurrentUser) {
         const messageDeleteModal = new MessageDeleteModal({
-          channel: this.channel,
-          message: this.message
+          channel          : this.channel,
+          message          : this.message,
+          widgetContainerEl: this.widgetContainerEl
         });
         messageDeleteModal.render();
       }
@@ -137,8 +139,9 @@ class Message {
     });
     time.addEventListener('click', () => {
       const messageDeleteModal = new MessageDeleteModal({
-        channel: this.channel,
-        message: this.message
+        channel          : this.channel,
+        message          : this.message,
+        widgetContainerEl: this.widgetContainerEl
       });
       messageDeleteModal.render();
     });

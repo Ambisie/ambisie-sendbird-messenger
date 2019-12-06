@@ -10,8 +10,8 @@ const description = 'Are you Sure? Do you want to delete message?';
 const submitText = 'DELETE';
 
 class MessageDeleteModal extends Modal {
-  constructor({ channel, message }) {
-    super({ title, description, submitText });
+  constructor({ channel, message, widgetContainerEl }) {
+    super({ title, description, submitText, widgetContainerEl });
     this.channel = channel;
     this.message = message;
     this._createElement();

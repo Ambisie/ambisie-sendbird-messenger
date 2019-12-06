@@ -17,16 +17,26 @@ $color-blue-dark: #328fe6 !default;
 $color-blue     : #32c5e6 !default;
 
 
-$color-purple-darker: #25706F!default;   //#463c66 !default;
-$color-purple-dark  : #35A2A1 !default;  //#4E4273 !default;
-$color-purple       : #39C3BE !default;  //#6e5baa !default;
-$color-purple-light : #41DED8 !default;  //#6742d6 !default;
+// $color-primary-darker: #25706F!default;   //#463c66 !default;
+// $color-primary-dark  : #35A2A1 !default;  //#4E4273 !default;
+// $color-primary       : #39C3BE !default;  //#6e5baa !default;
+// $color-primary-light : #41DED8 !default;  //#6742d6 !default;
 
-$color-purple-deep: #39C3BE !default;  //#673AB7 !default;
+// $color-primary-deep: #39C3BE !default;  //#673AB7 !default;
 
-$color-purple-text-dark : #466E6C !default;  //#7F6DA0 !default;
-$color-purple-text      : #82CBC8 !default;  //#c7b0ff !default;
-$color-purple-text-light: #C2EDEB !default;  //#A08DCE !default;
+// $color-primary-text-dark : #466E6C !default;  //#7F6DA0 !default;
+// $color-primary-text      : #82CBC8 !default;  //#c7b0ff !default;
+// $color-primary-text-light: #C2EDEB !default;  //#A08DCE !default;
+
+$color-primary-darker: darken($color-white, 20%) !default;   //#463c66 !default;
+$color-primary-dark  : darken($color-white, 10%) !default;  //#4E4273 !default;
+$color-primary       : $color-white !default;  //#6e5baa !default;
+$color-primary-light : $color-white !default;  //#6742d6 !default;
+
+$color-primary-text      : #2C2D30 !default;                          //#c7b0ff !default;
+$color-primary-text-dark : darken($color-primary-text, 20%) !default;   //#7F6DA0 !default;
+$color-primary-text-light: lighten($color-primary-text, 10%) !default;  //#A08DCE !default;
+$color-primary-deep      : $color-primary-text-dark;                    //#673AB7 !default;
 
 $color-green-online: #00C853 !default;
 

@@ -3,18 +3,20 @@
   @import 'variables';
 
   .modal-root {
-    display: flex;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
+    display         : flex;
+    position        : absolute;
+    left            : 0;
+    right           : 0;
+    top             : 0;
+    bottom          : 0;
+    z-index         : 9999;
     background-color: rgba(0, 0, 0, 0.5);
 
     & > .modal-body {
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
-      width: 450px;
+      max-width: 450px;
       background-color: $color-white;
       margin: auto;
       padding: 24px;
@@ -52,8 +54,8 @@
           padding: 6px;
           @include border-radius(4px);
           @include hover-focus {
-            color: $color-purple-light;
-            border: 1px solid $color-purple-light;
+            color: $color-primary-light;
+            border: 1px solid $color-primary-light;
           }
         }
         & > .modal-submit {

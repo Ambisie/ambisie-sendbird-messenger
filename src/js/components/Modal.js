@@ -1,14 +1,14 @@
 import styles from '../../scss/modal.scss';
 import { createDivEl } from '../utils';
 import { Spinner } from './Spinner';
-import { body } from '../const';
 
 class Modal {
-  constructor({ title, description, submitText }) {
-    this.contentElement = null;
-    this.cancelHandler = null;
-    this.submitHandler = null;
-    this.element = this._create({ title, description, submitText });
+  constructor({ title, description, submitText, widgetContainerEl }) {
+    this.widgetContainerEl = widgetContainerEl;
+    this.contentElement    = null;
+    this.cancelHandler     = null;
+    this.submitHandler     = null;
+    this.element           = this._create({ title, description, submitText });
   }
 
   _create({ title, description, submitText }) {
@@ -48,14 +48,14 @@ class Modal {
   }
 
   close() {
-    if (body.contains(this.element)) {
-      body.removeChild(this.element);
+    if (this.widgetContainerEl.contains(this.element)) {
+      this.widgetContainerEl.removeChild(this.element);
     }
   }
 
   render() {
-    if (!body.querySelector(`.${styles['modal-root']}`)) {
-      body.appendChild(this.element);
+    if (!this.widgetContainerEl.querySelector(`.${styles['modal-root']}`)) {
+      this.widgetContainerEl.appendChild(this.element);
     }
   }
 }

@@ -1,16 +1,17 @@
 .ambisie-sendbird-messenger {
   @import 'common';
 
-  height  : 100%;
-  width   : 100%;
-  position: relative;
-  display: flex;
+  height    : 100%;
+  width     : 100%;
+  min-height: 300px;
+  position  : relative;
+  display   : flex;
 
   .body {
     display       : flex;
     flex-direction: row;
     width         : 100%;
-    min-width     : 980px;
+    // min-width     : 980px;
 
     & > .body-left {
       display         : flex;
@@ -18,13 +19,13 @@
       justify-content : space-between;
       width           : 220px;
       height          : 100%;
-      background-color: $color-purple-dark;
+      background-color: $color-primary-dark;
 
       & > .body-left-list {
         display       : flex;
         flex-direction: column;
         height        : calc(100vh - 170px);
-        color         : $color-purple-text-dark;
+        color         : $color-primary-text-dark;
 
         .icon-create-chat {
           width : 20px;
@@ -32,7 +33,7 @@
           @include icon($ic-add-normal, 17px 17px, center center);
           @include hover {
             cursor          : pointer;
-            background-color: $color-purple-text-light;
+            background-color: $color-primary-text-light;
           }
         }
 
@@ -49,7 +50,7 @@
             @include hover {
               cursor     : pointer;
               font-weight: 600;
-              color      : $color-purple-text-light;
+              color      : $color-primary-text-light;
             }
           }
         }
@@ -66,9 +67,9 @@
             display  : block;
             padding  : 10px;
             margin   : 0 20px;
-            color    : $color-purple-text-light;
+            color    : $color-primary-text-light;
             font-size: 16px;
-            border   : 1px dashed $color-purple-text-light;
+            border   : 1px dashed $color-primary-text-light;
             @include border-radius(4px);
           }
         }
@@ -81,7 +82,7 @@
       & > .body-left-bottom {
         display         : flex;
         padding         : 20px;
-        background-color: $color-purple-darker;
+        background-color: $color-primary-darker;
 
         & > .bottom-profile {
           display    : flex;
@@ -103,7 +104,7 @@
 
           & > .nickname-title {
             display  : flex;
-            color    : $color-purple-text-dark;
+            color    : $color-primary;
             font-size: 14px;
           }
 
@@ -111,7 +112,7 @@
             display          : inline-block;
             max-width        : 150px;
             height           : 18px;
-            color            : $color-purple-text-light;
+            color            : $color-primary-text-light;
             font-size        : 16px;
             overflow         : hidden;
             text-overflow    : ellipsis;

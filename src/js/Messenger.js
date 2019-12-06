@@ -73,7 +73,6 @@ class Messenger {
         if(targetUserId) {
           this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
             .then((channel) => {
-              console.log(channel);
               this.chat.render(channel.url, false);
             });
         }

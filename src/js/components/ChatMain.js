@@ -6,11 +6,12 @@ import { createDivEl } from '../utils';
 import { ChatMenu } from './ChatMenu';
 
 class ChatMain {
-  constructor(channel) {
-    this.channel = channel;
-    this.body = null;
-    this.input = null;
-    this.menu = null;
+  constructor(channel, widgetContainerEl) {
+    this.widgetContainerEl = widgetContainerEl;
+    this.channel           = channel;
+    this.body              = null;
+    this.input             = null;
+    this.menu              = null;
     this._create();
   }
 
@@ -20,7 +21,7 @@ class ChatMain {
     const main = createDivEl({ className: styles['chat-main'] });
     root.appendChild(main);
 
-    this.body = new ChatBody(this.channel);
+    this.body = new ChatBody(this.channel, this.widgetContainerEl);
     main.appendChild(this.body.element);
 
     this.input = new ChatInput(this.channel);

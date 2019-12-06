@@ -6,7 +6,8 @@ import { Spinner } from './Spinner';
 import { MESSAGE_REQ_ID } from '../const';
 
 class ChatBody {
-  constructor(channel) {
+  constructor(channel, widgetContainerEl) {
+    this.widgetContainerEl = widgetContainerEl;
     this.channel = channel;
     this.readReceiptManageList = [];
     this.scrollHeight = 0;
@@ -101,7 +102,7 @@ class ChatBody {
 
   renderMessages(messageList, goToBottom = true, isPastMessage = false) {
     messageList.forEach(message => {
-      const messageItem = new Message({ channel: this.channel, message });
+      const messageItem = new Message({ channel: this.channel, message, widgetContainerEl: this.widgetContainerEl });
       const requestId = getDataInElement(messageItem.element, MESSAGE_REQ_ID)
         ? getDataInElement(messageItem.element, MESSAGE_REQ_ID)
         : '-1';

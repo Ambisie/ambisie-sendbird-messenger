@@ -12,7 +12,7 @@
     cursor: pointer;
     @include hover-focus {
       cursor: pointer;
-      border: 1px solid $color-purple-light;
+      border: 1px solid $color-primary-light;
       @include border-radius(2px);
     }
 

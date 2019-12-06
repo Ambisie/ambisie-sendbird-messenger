@@ -62,7 +62,7 @@ class Chat {
     this.top = new ChatTopMenu(channel);
     this.element.appendChild(this.top.element);
 
-    this.main = new ChatMain(channel);
+    this.main = new ChatMain(channel, this.bodyEl);
   }
 
   _addEventHandler() {

@@ -84,7 +84,7 @@
           @include icon($ic-search, 26px 26px, 8px center);
           @include hover-focus {
             @include icon($ic-search-over, 26px 26px, 8px center);
-            border: 1px solid $color-purple-light;
+            border: 1px solid $color-primary-light;
             font-weight: 300;
           }
           &::placeholder {

@@ -214,15 +214,13 @@ class SendBirdAction {
    */
 
   findChannelWithUsers(userIds) {
-    return this.getGroupChannelList(true).then((channels) => {
-      console.log(channels);
-      return _.find(channels, (channel) => (
-        _.every(userIds, (userId) => {
-          console.log("userId")
-          return !!_.find(channel.members, (m) => m.userId === userId );
-        })
+    return this.getGroupChannelList(true).then((channels) => (
+      _.find(channels, (channel) => (
+        _.every(userIds, (userId) => (
+          !!_.find(channel.members, (m) => m.userId === userId )
+        ))
       ))
-    });
+    ));
   }
 
   findOrCreateGroupChannelWithUsers(userIds) {

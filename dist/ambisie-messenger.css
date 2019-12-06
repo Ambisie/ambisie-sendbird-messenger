@@ -1,17 +1,15 @@
-.ambisie-sendbird-messenger .modal-message {
+.ambisie-sendbird-messenger .chat-main-root {
   display: flex;
-  align-items: center;
-  padding: 10px 10px;
-  width: 100%;
-  border: 1px solid #DC5960;
-  background-color: #ffffff;
-  font-size: 18px;
-  margin: 10px 0;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px; }
+  flex-direction: row;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0; }
+  .ambisie-sendbird-messenger .chat-main-root > .chat-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; }
 .ambisie-sendbird-messenger .sb-spinner {
   position: absolute;
   top: 0;
@@ -77,25 +75,25 @@
 .ambisie-sendbird-messenger {
   height: 100%;
   width: 100%;
+  min-height: 300px;
   position: relative;
   display: flex; }
   .ambisie-sendbird-messenger .body {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    min-width: 980px; }
+    width: 100%; }
     .ambisie-sendbird-messenger .body > .body-left {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       width: 220px;
       height: 100%;
-      background-color: #35A2A1; }
+      background-color: #e6e6e6; }
       .ambisie-sendbird-messenger .body > .body-left > .body-left-list {
         display: flex;
         flex-direction: column;
         height: calc(100vh - 170px);
-        color: #466E6C; }
+        color: black; }
         .ambisie-sendbird-messenger .body > .body-left > .body-left-list .icon-create-chat {
           width: 20px;
           height: 20px;
@@ -105,7 +103,7 @@
           background-repeat: no-repeat; }
           .ambisie-sendbird-messenger .body > .body-left > .body-left-list .icon-create-chat:hover {
             cursor: pointer;
-            background-color: #C2EDEB; }
+            background-color: #44464b; }
         .ambisie-sendbird-messenger .body > .body-left > .body-left-list > .chat-type {
           display: flex;
           flex-direction: row;
@@ -117,7 +115,7 @@
           .ambisie-sendbird-messenger .body > .body-left > .body-left-list > .chat-type > .chat-type-title:hover {
             cursor: pointer;
             font-weight: 600;
-            color: #C2EDEB; }
+            color: #44464b; }
         .ambisie-sendbird-messenger .body > .body-left > .body-left-list > .chat-list {
           flex-direction: column;
           width: 100%;
@@ -129,9 +127,9 @@
             display: block;
             padding: 10px;
             margin: 0 20px;
-            color: #C2EDEB;
+            color: #44464b;
             font-size: 16px;
-            border: 1px dashed #C2EDEB;
+            border: 1px dashed #44464b;
             border-radius: 4px;
             -webkit-border-radius: 4px;
             -moz-border-radius: 4px;
@@ -142,7 +140,7 @@
       .ambisie-sendbird-messenger .body > .body-left > .body-left-bottom {
         display: flex;
         padding: 20px;
-        background-color: #25706F; }
+        background-color: #cccccc; }
         .ambisie-sendbird-messenger .body > .body-left > .body-left-bottom > .bottom-profile {
           display: flex;
           height: 40px;
@@ -162,13 +160,13 @@
           padding-left: 10px; }
           .ambisie-sendbird-messenger .body > .body-left > .body-left-bottom > .bottom-nickname > .nickname-title {
             display: flex;
-            color: #466E6C;
+            color: #ffffff;
             font-size: 14px; }
           .ambisie-sendbird-messenger .body > .body-left > .body-left-bottom > .bottom-nickname > .nickname-content {
             display: inline-block;
             max-width: 150px;
             height: 18px;
-            color: #C2EDEB;
+            color: #44464b;
             font-size: 16px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -211,7 +209,7 @@
   cursor: pointer; }
   .ambisie-sendbird-messenger .channel-item:hover, .ambisie-sendbird-messenger .channel-item:focus {
     cursor: pointer;
-    border: 1px solid #41DED8;
+    border: 1px solid #ffffff;
     background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/icon-enter.png");
     background-position: calc(100% - 20px) center;
     background-size: 24px 24px;
@@ -320,7 +318,7 @@
           background-position: 8px center;
           background-size: 26px 26px;
           background-repeat: no-repeat;
-          border: 1px solid #41DED8;
+          border: 1px solid #ffffff;
           font-weight: 300; }
         .ambisie-sendbird-messenger .list-root > .list-body > .list-search > .search-input::placeholder {
           color: #e3e3e3;
@@ -332,18 +330,6 @@
       max-height: calc(100vh - 205px);
       overflow-y: auto;
       overflow-x: hidden; }
-.ambisie-sendbird-messenger .chat-main-root {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0; }
-  .ambisie-sendbird-messenger .chat-main-root > .chat-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%; }
 .ambisie-sendbird-messenger .chat-empty {
   display: flex;
   width: 100%;
@@ -383,6 +369,78 @@
   justify-content: flex-start;
   width: 100%;
   height: 100%; }
+.ambisie-sendbird-messenger .user-item {
+  display: flex;
+  padding: 8px 20px 8px 20px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #dedede;
+  justify-content: space-between;
+  cursor: pointer; }
+  .ambisie-sendbird-messenger .user-item:hover, .ambisie-sendbird-messenger .user-item:focus {
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px; }
+  .ambisie-sendbird-messenger .user-item > .user-info {
+    display: flex;
+    align-items: center; }
+    .ambisie-sendbird-messenger .user-item > .user-info > .user-profile {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/image-profile.svg");
+      background-position: center center;
+      background-size: 40px 40px;
+      background-repeat: no-repeat; }
+    .ambisie-sendbird-messenger .user-item > .user-info > .user-nickname {
+      margin: 0 10px;
+      font-size: 18px;
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -ms-text-overflow: ellipsis;
+      white-space: nowrap; }
+    .ambisie-sendbird-messenger .user-item > .user-info > .user-online {
+      display: flex;
+      width: 8px;
+      height: 8px;
+      border: 1px solid #abb8c4;
+      background-color: #abb8c4;
+      opacity: 0.4;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%; }
+    .ambisie-sendbird-messenger .user-item > .user-info > .user-online.active {
+      border: 1px solid #00C853;
+      background-color: #00C853;
+      opacity: 1; }
+  .ambisie-sendbird-messenger .user-item > .user-state {
+    display: flex;
+    align-items: center; }
+    .ambisie-sendbird-messenger .user-item > .user-state > .user-time {
+      display: flex;
+      color: #abb8c4;
+      margin-right: 10px; }
+    .ambisie-sendbird-messenger .user-item > .user-state > .user-select {
+      display: flex;
+      width: 30px;
+      height: 30px;
+      opacity: 0.4;
+      background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/icon-check-unselect.png");
+      background-position: center center;
+      background-size: 30px 30px;
+      background-repeat: no-repeat; }
+    .ambisie-sendbird-messenger .user-item > .user-state > .user-select.active {
+      opacity: 1;
+      background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/icon-check-select.png");
+      background-position: center center;
+      background-size: 30px 30px;
+      background-repeat: no-repeat; }
 .ambisie-sendbird-messenger .chat-top {
   display: flex;
   flex-direction: row;
@@ -484,15 +542,15 @@
   padding: 6px 20px;
   cursor: pointer; }
   .ambisie-sendbird-messenger .list-item:hover {
-    background-color: #25706F; }
+    background-color: #cccccc; }
   .ambisie-sendbird-messenger .list-item > .item-top {
     display: flex;
-    color: #C2EDEB; }
+    color: #44464b; }
     .ambisie-sendbird-messenger .list-item > .item-top > .item-count {
       width: 18px;
       height: 18px;
       box-sizing: border-box;
-      border: 1px solid #C2EDEB;
+      border: 1px solid #44464b;
       align-items: center;
       align-content: center;
       text-align: center;
@@ -507,7 +565,7 @@
       overflow: hidden; }
   .ambisie-sendbird-messenger .list-item > .item-bottom {
     display: flex;
-    color: #466E6C;
+    color: black;
     justify-content: space-between;
     flex-direction: column;
     font-size: 14px;
@@ -523,7 +581,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        color: #C2EDEB;
+        color: #44464b;
         opacity: 0.7; }
       .ambisie-sendbird-messenger .list-item > .item-bottom > .item-message > .item-message-unread {
         display: none;
@@ -547,7 +605,7 @@
       font-size: 11px; }
 
 .ambisie-sendbird-messenger .list-item.active > .item-top {
-  color: #82CBC8;
+  color: #2C2D30;
   font-weight: 600; }
 .ambisie-sendbird-messenger .chat-body {
   display: flex;
@@ -577,7 +635,7 @@
       cursor: pointer; }
     .ambisie-sendbird-messenger .chat-message > .message-content > .message-nickname.is-user {
       font-weight: 600;
-      color: #39C3BE;
+      color: black;
       cursor: initial; }
     .ambisie-sendbird-messenger .chat-message > .message-content > .message-content {
       display: inline;
@@ -662,18 +720,34 @@
     overflow: hidden;
     -ms-text-overflow: ellipsis;
     text-overflow: ellipsis; }
+.ambisie-sendbird-messenger .modal-message {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  width: 100%;
+  border: 1px solid #DC5960;
+  background-color: #ffffff;
+  font-size: 18px;
+  margin: 10px 0;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px; }
 .ambisie-sendbird-messenger .modal-root {
   display: flex;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.5); }
   .ambisie-sendbird-messenger .modal-root > .modal-body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: 450px;
+    max-width: 450px;
     background-color: #ffffff;
     margin: auto;
     padding: 24px;
@@ -716,8 +790,8 @@
         -ms-border-radius: 4px;
         -o-border-radius: 4px; }
         .ambisie-sendbird-messenger .modal-root > .modal-body > .modal-bottom > .modal-cancel:hover, .ambisie-sendbird-messenger .modal-root > .modal-body > .modal-bottom > .modal-cancel:focus {
-          color: #41DED8;
-          border: 1px solid #41DED8; }
+          color: #ffffff;
+          border: 1px solid #ffffff; }
       .ambisie-sendbird-messenger .modal-root > .modal-body > .modal-bottom > .modal-submit {
         display: flex;
         color: #ffffff;
@@ -734,6 +808,35 @@
         .ambisie-sendbird-messenger .modal-root > .modal-body > .modal-bottom > .modal-submit:hover, .ambisie-sendbird-messenger .modal-root > .modal-body > .modal-bottom > .modal-submit:focus {
           background-color: #328fe6;
           border: 1px solid #328fe6; }
+.ambisie-sendbird-messenger .chat-user-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer; }
+  .ambisie-sendbird-messenger .chat-user-item > .user-image {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    background-size: 36px 36px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%; }
+  .ambisie-sendbird-messenger .chat-user-item > .user-nickname {
+    width: 154px;
+    max-width: 154px;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis; }
+  .ambisie-sendbird-messenger .chat-user-item > .user-nickname.is-user {
+    font-weight: 600;
+    color: black; }
 .ambisie-sendbird-messenger .chat-input {
   display: flex;
   padding: 20px;
@@ -785,7 +888,7 @@
     display: flex;
     font-size: 15px;
     width: 100%;
-    height: 38px;
+    height: 36px;
     padding: 7px 8px 6px 8px;
     box-sizing: border-box;
     border: 1px solid #e0e2e5;
@@ -816,53 +919,6 @@
         resize: none;
         padding-top: 2px;
         line-height: 1.4; }
-.ambisie-sendbird-messenger .chat-user-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 10px 20px;
-  cursor: pointer; }
-  .ambisie-sendbird-messenger .chat-user-item > .user-image {
-    display: flex;
-    width: 36px;
-    height: 36px;
-    margin-right: 10px;
-    background-size: 36px 36px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%; }
-  .ambisie-sendbird-messenger .chat-user-item > .user-nickname {
-    width: 154px;
-    max-width: 154px;
-    white-space: nowrap;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis; }
-  .ambisie-sendbird-messenger .chat-user-item > .user-nickname.is-user {
-    font-weight: 600;
-    color: #39C3BE; }
-.ambisie-sendbird-messenger .modal-input {
-  display: flex;
-  width: 100%;
-  height: 35px;
-  border: 1px solid #dedede;
-  background-color: #F8F8F8;
-  font-size: 18px;
-  padding: 2px 10px;
-  margin: 10px 0;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px; }
-  .ambisie-sendbird-messenger .modal-input:focus {
-    outline: none;
-    background-color: #ffffff;
-    border: 1px solid #41DED8; }
 .ambisie-sendbird-messenger .chat-menu-root {
   display: flex;
   flex-direction: column;
@@ -942,75 +998,21 @@
       max-height: calc(100% - 56px);
       overflow-y: auto;
       overflow-x: hidden; }
-.ambisie-sendbird-messenger .user-item {
+.ambisie-sendbird-messenger .modal-input {
   display: flex;
-  padding: 8px 20px 8px 20px;
-  border: 1px solid transparent;
-  border-bottom: 1px solid #dedede;
-  justify-content: space-between;
-  cursor: pointer; }
-  .ambisie-sendbird-messenger .user-item:hover, .ambisie-sendbird-messenger .user-item:focus {
-    cursor: pointer;
-    border: 1px solid #41DED8;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px; }
-  .ambisie-sendbird-messenger .user-item > .user-info {
-    display: flex;
-    align-items: center; }
-    .ambisie-sendbird-messenger .user-item > .user-info > .user-profile {
-      display: flex;
-      width: 40px;
-      height: 40px;
-      background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/image-profile.svg");
-      background-position: center center;
-      background-size: 40px 40px;
-      background-repeat: no-repeat; }
-    .ambisie-sendbird-messenger .user-item > .user-info > .user-nickname {
-      margin: 0 10px;
-      font-size: 18px;
-      max-width: 250px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -ms-text-overflow: ellipsis;
-      white-space: nowrap; }
-    .ambisie-sendbird-messenger .user-item > .user-info > .user-online {
-      display: flex;
-      width: 8px;
-      height: 8px;
-      border: 1px solid #abb8c4;
-      background-color: #abb8c4;
-      opacity: 0.4;
-      border-radius: 50%;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%; }
-    .ambisie-sendbird-messenger .user-item > .user-info > .user-online.active {
-      border: 1px solid #00C853;
-      background-color: #00C853;
-      opacity: 1; }
-  .ambisie-sendbird-messenger .user-item > .user-state {
-    display: flex;
-    align-items: center; }
-    .ambisie-sendbird-messenger .user-item > .user-state > .user-time {
-      display: flex;
-      color: #abb8c4;
-      margin-right: 10px; }
-    .ambisie-sendbird-messenger .user-item > .user-state > .user-select {
-      display: flex;
-      width: 30px;
-      height: 30px;
-      opacity: 0.4;
-      background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/icon-check-unselect.png");
-      background-position: center center;
-      background-size: 30px 30px;
-      background-repeat: no-repeat; }
-    .ambisie-sendbird-messenger .user-item > .user-state > .user-select.active {
-      opacity: 1;
-      background-image: url("https://dxstmhyqfqr1o.cloudfront.net/web-basic/icon-check-select.png");
-      background-position: center center;
-      background-size: 30px 30px;
-      background-repeat: no-repeat; }
+  width: 100%;
+  height: 35px;
+  border: 1px solid #dedede;
+  background-color: #F8F8F8;
+  font-size: 18px;
+  padding: 2px 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px; }
+  .ambisie-sendbird-messenger .modal-input:focus {
+    outline: none;
+    background-color: #ffffff;
+    border: 1px solid #ffffff; }
