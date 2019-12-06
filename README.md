@@ -34,31 +34,20 @@ npm install
 npm start
 ```
 
-## Customizing the sample
-If you want to put some changes into the sample, you should build it using `webpack`.
+## Dependencies
+Ensure `lodash` is loading in the relevant env
 
-1. Install packages
+## Building
 
-> Require that you have Node v8.x+ installed.
+* `npm start` - build distribution in `prod` mode and run the test server
+* `npm run start:dev` - run webpack dev server
+* `npm run build` - build distribution files (`/dist`) in `prod` mode
+* `npm run dev` - build distribution files (`/dist`) in `dev` mode
+* `npm run dev:w` - build distribution files (`/dist`) in `dev` mode and rebuild on file changes
 
-```bash
-npm install
-```
+## Developing
 
-2. Modify files
-If you want to change `APP_ID`, change `APP_ID` in const.js to the other `APP_ID` you want.
-You can test the sample with local server by running the following command.
+Run in separate terminals
+* `npm run dev:w`
+* `npm run start:dev`
 
-```bash
-npm run start:dev
-```
-
-3. Build the sample
-When the modification is complete, you'll need to bundle the file using `webpack`. The bundled files are created in the `dist` folder.
-Please check `webpack.config.js` for settings.
-
-```bash
-npm run build
-```
-
-> The `npm start` command contains `npm run build`. Check the scripts part of the package.json file.

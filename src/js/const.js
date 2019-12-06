@@ -9,4 +9,3 @@ export const UPDATE_INTERVAL_TIME    = 5 * 1000;
 export const COLOR_RED               = '#DC5960';
 export const MESSAGE_REQ_ID          = 'reqId';
 export const OPEN_CHANNEL_SEARCH_URL = 'search_open_channel';
-

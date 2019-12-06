@@ -9,15 +9,23 @@ const PRODUCTION = 'production';
 module.exports = () => {
   const config = {
     entry: {
-      messenger: ['./src/js/main.js', './src/scss/main.scss']
+      messenger: ['./src/scss/main.scss', './src/js/main.js']
     },
     output: {
       path         : path.resolve(__dirname, './dist'),
-      filename     : 'ambisie.[name].js',
-      library      : '[name]',
+      filename     : 'ambisie-[name].js',
+      library      : 'AmbisieMessenger',
       libraryExport: 'default',
       libraryTarget: 'umd',
       publicPath   : 'dist'
+    },
+    externals: {
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_',
+      },
     },
     devtool: 'cheap-eval-source-map',
     devServer: {
@@ -69,7 +77,7 @@ module.exports = () => {
     },
     plugins: [
       new ExtractTextPlugin({
-        filename: 'ambisie.[name].css'
+        filename: 'ambisie-[name].css'
       })
     ]
   };

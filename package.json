@@ -1,8 +1,8 @@
 {
-  "name": "Sample-JS-Web-Basic",
+  "name": "ambisie-messenger",
   "version": "1.0.0",
-  "description": "SendBird Web Basic Sample",
-  "main": "index.js",
+  "description": "Ambisie customisation of the SendBird Web Basic Sample",
+  "main": "/dist/ambisie-messenger.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack --mode=development",
     "dev:w": "./node_modules/.bin/webpack --mode=none -w",
@@ -10,7 +10,11 @@
     "start:dev": "./node_modules/.bin/webpack-dev-server",
     "start": "npm run build && node test/server/index.js"
   },
-  "author": "SendBird",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ambisie/ambisie-sendbird-messenger.git"
+  },
+  "author": "Ambisie & SendBird",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",

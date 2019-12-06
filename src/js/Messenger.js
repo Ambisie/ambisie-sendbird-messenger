@@ -11,14 +11,9 @@ import { LeftListItem } from './components/LeftListItem';
 
 
 const view = _.template(`
-  <div class="messenger">
+  <div class="ambisie-sendbird-messenger">
     <div class="body">
       <div class="body-left">
-        <div class="body-left-top">
-          <div class="top-logo">
-            <img src="<%= logoUrl %>" width="150" class="logo-image">
-          </div>
-        </div>
         <div class="body-left-list">
           <div class="chat-type">
             <div>CHATS</div>
