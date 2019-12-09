@@ -98,7 +98,7 @@ class Message {
       const count = sendbirdAction.getReadReceipt(this.channel, this.message);
       const read = createDivEl({
         className: count ? [styles.read, styles.active] : styles.read,
-        content: count
+        content: ''
       });
       messageContent.appendChild(read);
     }

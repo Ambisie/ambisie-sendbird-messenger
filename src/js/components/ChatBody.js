@@ -61,7 +61,7 @@ class ChatBody {
           }
           const latestCount = SendBirdAction.getInstance().getReadReceipt(this.channel, message);
           if (readItem && latestCount.toString() !== readItem.textContent.toString()) {
-            readItem.innerHTML = latestCount;
+            // readItem.innerHTML = latestCount;
             if (latestCount.toString() === '0') {
               removeClass(readItem, className);
             }
