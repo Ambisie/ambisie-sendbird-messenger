@@ -40,7 +40,7 @@ const view = _.template(`
   </div>`);
 
 class Messenger {
-  constructor({ sendBirdAppId, userId, nickname, targetUserId, containerEl }) {
+  constructor({ sendBirdAppId, userAccessToken, userId, nickname, targetUserId, containerEl }) {
     this.containerEl = containerEl;
     this.containerEl.innerHTML = view({ logoUrl: 'https://www.ambisie.com/images/logo/Logo-White@2x.png' });
 
@@ -50,11 +50,11 @@ class Messenger {
     this.chatLeft = new ChatLeftMenu(this.bodyEl);
     this.chat     = new Chat(this.bodyEl);
 
-    this.connect({ userId, nickname, targetUserId });
+    this.connect({ userAccessToken, userId, nickname, targetUserId });
   }
 
 
-  connect({ userId, nickname, targetUserId }) {
+  connect({ userAccessToken, userId, nickname, targetUserId }) {
     if (isEmpty(userId) || isEmpty(nickname)) {
       alert('Messenger UserID and Nickname are required.');
     }
@@ -62,7 +62,7 @@ class Messenger {
     Spinner.start(this.bodyEl);
 
     this.sb
-      .connect(userId, nickname)
+      .connect(userId, userAccessToken, nickname)
       .then(user => {
         this.chatLeft.updateUserInfo(user);
         this.createConnectionHandler();

@@ -26,11 +26,12 @@ class SendBirdAction {
   /**
    * Connect
    */
-  connect(userId, nickname) {
+  connect(userId, userApiKey, nickname) {
     return new Promise((resolve, reject) => {
       const sb = SendBird.getInstance();
       sb.connect(
         userId,
+        userApiKey,
         (user, error) => {
           if (error) {
             reject(error);
