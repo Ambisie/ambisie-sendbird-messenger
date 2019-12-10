@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty } from './utils';
+import { isEmpty, addClass, removeClass } from './utils';
 import { SendBirdAction } from './SendBirdAction';
 import { ChatLeftMenu } from './ChatLeftMenu';
 import { Chat } from './Chat';
@@ -67,7 +67,7 @@ class Messenger {
         this.createConnectionHandler();
         this.createChannelEvent();
         this.updateGroupChannelTime();
-        this.chatLeft.getGroupChannelList(true);
+        this.chatLeft.getGroupChannelList(true).then(() => this.updateLeftMenuVisibility());
 
         if(targetUserId) {
           this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
@@ -80,6 +80,14 @@ class Messenger {
         console.error("ERROR:", e);
         alert('Messenger connection failed.');
       });
+  }
+
+  updateLeftMenuVisibility() {
+    const leftMenuEl = this.bodyEl.querySelector('.body-left');
+
+    leftMenuEl.querySelectorAll('.list-item').length > 0
+      ? addClass(leftMenuEl, 'show')
+      : removeClass(leftMenuEl, 'show');
   }
 
   createConnectionHandler() {

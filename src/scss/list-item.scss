@@ -11,27 +11,28 @@
       background-color: $color-primary-darker;
     }
     & > .item-top {
-      display: flex;
-      color: $color-primary-text-light;
+      display    : flex;
+      color      : $color-primary-text-light;
+      align-items: center;
+
       & > .item-count {
-        width: 18px;
-        height: 18px;
-        box-sizing: border-box;
-        border: 1px solid $color-primary-text-light;
-        align-items: center;
+        width        : 18px;
+        height       : 18px;
+        box-sizing   : border-box;
+        border       : 1px solid $color-primary-text-light;
+        align-items  : center;
         align-content: center;
-        text-align: center;
-        margin-right: 8px;
-        font-size: 13px;
-        line-height: 17px;
-        display:none;
+        text-align   : center;
+        margin-right : 8px;
+        font-size    : 13px;
+        line-height  : 17px;
+        display      : none;
       }
       & > .item-title {
-        width: 100%;
-        max-width: 150px;
-        white-space: nowrap;
+        width        : 100%;
+        white-space  : nowrap;
         text-overflow: ellipsis;
-        overflow: hidden;
+        overflow     : hidden;
 
         .channel-member {
           display    : flex;
@@ -46,6 +47,21 @@
             font-weight: 800;
           }
         }
+      }
+      & > .item-message-unread {
+        display: none;
+        width: 16px;
+        height: 16px;
+        background-color: $color-red;
+        text-align: center;
+        color: $color-white;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 16px;
+        @include border-radius(50%);
+      }
+      & > .item-message-unread.active {
+        display: block;
       }
     }
     & > .item-bottom {
@@ -68,21 +84,6 @@
           overflow: hidden;
           color: $color-primary-text-light;
           opacity: 0.7;
-        }
-        & > .item-message-unread {
-          display: none;
-          width: 16px;
-          height: 16px;
-          background-color: $color-red;
-          text-align: center;
-          color: $color-white;
-          font-size: 10px;
-          font-weight: 600;
-          line-height: 16px;
-          @include border-radius(50%);
-        }
-        & > .item-message-unread.active {
-          display: block;
         }
       }
       & > .item-time {

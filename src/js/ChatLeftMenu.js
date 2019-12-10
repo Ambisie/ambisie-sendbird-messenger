@@ -101,7 +101,7 @@ class ChatLeftMenu {
    */
   getGroupChannelList(isInit = false) {
     Spinner.start(this.bodyEl);
-    SendBirdAction.getInstance()
+    return SendBirdAction.getInstance()
       .getGroupChannelList(isInit)
       .then(groupChannelList => {
         this.toggleGroupChannelDefaultItem(groupChannelList);

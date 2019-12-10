@@ -85,8 +85,10 @@ class LeftListItem {
       const itemTop = createDivEl({ className: styles['item-top'] });
       const itemTopCount = createDivEl({ className: styles['item-count'], content: this.memberCount });
       const itemTopTitle = createDivEl({ className: styles['item-title'], content: this.title });
+      const messageUnread = createDivEl({ className: [styles['item-message-unread'], styles.active], content: this.unreadMessageCount });
       itemTop.appendChild(itemTopCount);
       itemTop.appendChild(itemTopTitle);
+      itemTop.appendChild(messageUnread);
       item.appendChild(itemTop);
 
       const itemBottom = createDivEl({ className: styles['item-bottom'] });
@@ -97,11 +99,6 @@ class LeftListItem {
         content: this.lastMessageText
       });
       itemBottomMessage.appendChild(itemBottomMessageText);
-      const itemBottomMessageUnread = createDivEl({
-        className: [styles['item-message-unread'], styles.active],
-        content: this.unreadMessageCount
-      });
-      itemBottomMessage.appendChild(itemBottomMessageUnread);
 
       const itemBottomTime = createDivEl({ className: styles['item-time'], content: this.lastMessageTimeText });
       setDataInElement(itemBottomTime, KEY_MESSAGE_LAST_TIME, this.lastMessagetime);

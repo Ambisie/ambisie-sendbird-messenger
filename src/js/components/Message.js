@@ -87,9 +87,12 @@ class Message {
       }
     });
 
+    const messageFooter = createDivEl({ className: styles['message-footer'] });
+
     messageBody.appendChild(nickname);
     messageBody.appendChild(msg);
-    messageBody.appendChild(time);
+    messageBody.appendChild(messageFooter);
+    messageFooter.appendChild(time);
     messageContent.appendChild(avatar);
     messageContent.appendChild(messageBody);
 
@@ -98,8 +101,9 @@ class Message {
       const count = sendbirdAction.getReadReceipt(this.channel, this.message);
       const read = createDivEl({
         className: count ? [styles.read, styles.active] : styles.read,
+        content: count ? '' : '[ ✓ ]'
       });
-      messageContent.appendChild(read);
+      messageFooter.appendChild(read);
     }
 
     root.appendChild(messageContent);
@@ -135,6 +139,8 @@ class Message {
       window.open(this.message.url);
     });
 
+    const messageFooter = createDivEl({ className: styles['message-footer'] });
+
     const time = createDivEl({ className: styles.time, content: timestampToTime(this.message.createdAt) });
     time.addEventListener('mouseover', () => {
       this._hoverOnTime(time, true);
@@ -151,18 +157,19 @@ class Message {
       messageDeleteModal.render();
     });
 
-    messageBody.appendChild(nickname);
-
+    messageFooter.appendChild(time);
 
     if (this.channel.isGroupChannel()) {
       const count = sendbirdAction.getReadReceipt(this.channel, this.message);
       const read = createDivEl({
         className: count ? [styles.read, styles.active] : styles.read,
+        content: count ? '' : '[ ✓ ]'
       });
-      messageContent.appendChild(read);
+      messageFooter.appendChild(read);
     }
 
     root.appendChild(messageContent);
+    messageBody.appendChild(nickname);
 
     if (isImage(this.message.type) && this.message.messageId) {
       const imageContent = createDivEl({ className: styles['image-content'] });
@@ -178,8 +185,9 @@ class Message {
       imageContent.appendChild(imageRender);
       messageBody.appendChild(imageContent);
     }
+
     messageBody.appendChild(msg);
-    messageBody.appendChild(time);
+    messageBody.appendChild(messageFooter);
     messageContent.appendChild(avatar);
     messageContent.appendChild(messageBody);
 
