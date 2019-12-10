@@ -14,9 +14,10 @@ class ChatInput {
 
   _createElement(channel) {
     const root = createDivEl({ className: styles['chat-input'] });
+    const inputPanel = createDivEl({ className: styles['input-panel'] });
 
     this.typing = createDivEl({ className: styles['typing-field'] });
-    root.appendChild(this.typing);
+    inputPanel.appendChild(this.typing);
 
     const file = document.createElement('label');
     file.className = styles['input-file'];
@@ -48,7 +49,7 @@ class ChatInput {
     });
 
     file.appendChild(fileInput);
-    root.appendChild(file);
+    inputPanel.appendChild(file);
 
     const inputText = createDivEl({ className: styles['input-text'] });
 
@@ -60,37 +61,8 @@ class ChatInput {
         SendBirdAction.getInstance().markAsRead(this.channel);
       }
     });
-    this.input.addEventListener('keypress', e => {
-      if (e.keyCode === KEY_ENTER) {
-        if (!e.shiftKey) {
-          e.preventDefault();
-          const message = this.input.value;
-          this.input.value = '';
-          if (message) {
-            const tempMessage = SendBirdAction.getInstance().sendUserMessage({
-              channel: this.channel,
-              message,
-              handler: (message, error) => {
-                error
-                  ? Chat.getInstance().main.removeMessage(tempMessage.reqId, true)
-                  : Chat.getInstance().main.renderMessages([message]);
-              }
-            });
-            Chat.getInstance().main.renderMessages([tempMessage]);
-            if (channel.isGroupChannel()) {
-              channel.endTyping();
-            }
-          }
-        } else {
-          if (channel.isGroupChannel()) {
-            channel.startTyping();
-          }
-        }
-      } else {
-        if (channel.isGroupChannel()) {
-          channel.startTyping();
-        }
-      }
+    this.input.addEventListener('keypress', () => {
+      if (channel.isGroupChannel()) channel.startTyping();
     });
     this.input.addEventListener('focusin', () => {
       this.channel._autoMarkAsRead = true;
@@ -102,8 +74,38 @@ class ChatInput {
     });
 
     inputText.appendChild(this.input);
-    root.appendChild(inputText);
+    inputPanel.appendChild(inputText);
+
+    const sendButton     = document.createElement('button');
+    sendButton.innerHTML = "Send";
+    sendButton.className = styles['send-button'];
+    sendButton.addEventListener('click', () => {
+      this.postMessageFromInput();
+    });
+
+    root.appendChild(inputPanel);
+    root.appendChild(sendButton);
     return root;
+  }
+
+  postMessageFromInput() {
+    const message = this.input.value;
+    this.input.value = '';
+    if (message) {
+      const tempMessage = SendBirdAction.getInstance().sendUserMessage({
+        channel: this.channel,
+        message,
+        handler: (message, error) => {
+          error
+            ? Chat.getInstance().main.removeMessage(tempMessage.reqId, true)
+            : Chat.getInstance().main.renderMessages([message]);
+        }
+      });
+      Chat.getInstance().main.renderMessages([tempMessage]);
+      if (this.channel.isGroupChannel()) {
+        this.channel.endTyping();
+      }
+    }
   }
 
   updateTyping(memberList) {

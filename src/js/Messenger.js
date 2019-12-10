@@ -72,13 +72,11 @@ class Messenger {
         if(targetUserId) {
           this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
             .then((channel) => {
-              this.chat.render(channel.url, false).then(() => {
-                // HACK: allow queued background events to be processed in the event loop
-                _.defer(() => {
-                  this.updateLeftMenuVisibility(true);
-                  // HACK: allow queued background events to be processed in the event loop
-                  _.delay(() => this.chatLeft.activeChannelItem(channel.url), 1000);
-                });
+              this.chat.render(channel.url, false);
+              // HACK: allow queued background events to be processed in the event loop
+              _.defer(() => {
+                this.updateLeftMenuVisibility(true);
+                this.chatLeft.activeChannelItem(channel.url);
               });
             });
         }
