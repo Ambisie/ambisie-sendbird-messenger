@@ -46,6 +46,7 @@ class Chat {
   renderEmptyElement() {
     this._removeChatElement();
     this.targetEl.appendChild(this.emptyElement);
+    return Promise.resolve();
   }
 
   _removeEmptyElement() {
@@ -101,7 +102,7 @@ class Chat {
     this._removeEmptyElement();
     this._removeChatElement();
     ChatLeftMenu.getInstance().activeChannelItem(channelUrl);
-    sendbirdAction
+    return sendbirdAction
       .getChannel(channelUrl, isOpenChannel)
       .then(channel => {
         this.channel = channel;
@@ -145,7 +146,7 @@ class Chat {
   }
 
   render(channelUrl, isOpenChannel = true) {
-    channelUrl ? this._renderChatElement(channelUrl, isOpenChannel) : this.renderEmptyElement();
+    return channelUrl ? this._renderChatElement(channelUrl, isOpenChannel) : this.renderEmptyElement();
   }
 
   refresh(channel) {

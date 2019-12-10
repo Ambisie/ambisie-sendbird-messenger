@@ -72,7 +72,14 @@ class Messenger {
         if(targetUserId) {
           this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
             .then((channel) => {
-              this.chat.render(channel.url, false);
+              this.chat.render(channel.url, false).then(() => {
+                // HACK: allow queued background events to be processed in the event loop
+                _.defer(() => {
+                  this.updateLeftMenuVisibility(true);
+                  // HACK: allow queued background events to be processed in the event loop
+                  _.delay(() => this.chatLeft.activeChannelItem(channel.url), 1000);
+                });
+              });
             });
         }
       })
@@ -82,10 +89,10 @@ class Messenger {
       });
   }
 
-  updateLeftMenuVisibility() {
+  updateLeftMenuVisibility(forceShow) {
     const leftMenuEl = this.bodyEl.querySelector('.body-left');
 
-    leftMenuEl.querySelectorAll('.list-item').length > 0
+    forceShow || leftMenuEl.querySelectorAll('.list-item').length > 0
       ? addClass(leftMenuEl, 'show')
       : removeClass(leftMenuEl, 'show');
   }
