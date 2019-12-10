@@ -1,17 +1,9 @@
 import moment from 'moment';
+import { getAppState } from './AppState';
+import { PLACEHOLDER_AVATAR_URL } from './const';
 
 export const timestampToTime = timestamp => {
-  const now = new Date().getTime();
-  const nowDate = moment.unix(now.toString().length === 13 ? now / 1000 : now).format('MM/DD');
-
-  let date = moment.unix(timestamp.toString().length === 13 ? timestamp / 1000 : timestamp).format('MM/DD');
-  if (date === 'Invalid date') {
-    date = '';
-  }
-
-  return nowDate === date
-    ? moment.unix(timestamp.toString().length === 13 ? timestamp / 1000 : timestamp).format('HH:mm')
-    : date;
+  return moment.unix(timestamp.toString().length === 13 ? timestamp / 1000 : timestamp).format('dddd, Do MMMM @ h:mma');
 };
 
 export const timestampToDateString = timestamp => {
@@ -175,4 +167,14 @@ export const protectFromXSS = text => {
         .replace(/\"/g, '&quot;')
         .replace(/\'/g, '&apos;')
     : text;
+};
+
+export const membersExcludingCurrentUserIn = (channel) => {
+  return channel.members.filter( member => (
+    member.userId !== getAppState().currentUserId
+  ));
+}
+
+export const avatarFor = (member) => {
+  return (member || {}).profileUrl || getAppState().placeholderAvatarUrl || PLACEHOLDER_AVATAR_URL;
 };

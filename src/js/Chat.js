@@ -1,5 +1,6 @@
 import styles from '../scss/chat.scss';
 import { createDivEl, errorAlert } from './utils';
+import { getAppState } from './AppState';
 import { SendBirdAction } from './SendBirdAction';
 import { Spinner } from './components/Spinner';
 import { ChatLeftMenu } from './ChatLeftMenu';
@@ -30,16 +31,13 @@ class Chat {
     const content = createDivEl({ className: styles['empty-content'] });
     item.appendChild(content);
 
-    const title = createDivEl({ className: styles['content-title'], content: 'WELCOME TO SAMPLE CHAT' });
+    const title = createDivEl({ className: styles['content-title'], content: 'PRIVATE MESSAGES' });
     content.appendChild(title);
     const image = createDivEl({ className: styles['content-image'] });
     content.appendChild(image);
     const desc = createDivEl({
       className: styles['content-desc'],
-      content:
-        'Create or select a channel to chat in.\n' +
-        "If you don't have a channel to participate,\n" +
-        'go ahead and create your first channel now.'
+      content: getAppState().noMessagePlaceholder || 'Find storytellers and make contact'
     });
     content.appendChild(desc);
     return item;

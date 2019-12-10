@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import styles from '../../scss/list-item.scss';
 import {
   addClass,
@@ -9,8 +10,16 @@ import {
   timestampFromNow
 } from '../utils';
 import { ChatLeftMenu } from '../ChatLeftMenu';
+import { membersExcludingCurrentUserIn } from '../utils';
 
 const KEY_MESSAGE_LAST_TIME = 'origin';
+
+const channelMembersView = _.template(`
+  <div class="channel-member">
+    <img class="avatar" src="<%= profileUrl %>" />
+    <p><%= nickname %></p>
+  </div>
+`);
 
 class LeftListItem {
   constructor({ channel, handler }) {
@@ -25,11 +34,9 @@ class LeftListItem {
   get title() {
     return this.channel.isOpenChannel()
       ? `# ${this.channel.name}`
-      : this.channel.members
-          .map(member => {
-            return protectFromXSS(member.nickname);
-          })
-          .join(', ');
+      : membersExcludingCurrentUserIn(this.channel)
+          .map(channelMembersView)
+          .join('');
   }
 
   get lastMessagetime() {

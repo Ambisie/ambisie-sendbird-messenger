@@ -1,10 +1,11 @@
 import styles from '../../scss/message.scss';
-import { createDivEl, isImage, protectFromXSS, setDataInElement, timestampToTime } from '../utils';
+import { createDivEl, isImage, protectFromXSS, setDataInElement, timestampToTime, avatarFor } from '../utils';
 import { SendBirdAction } from '../SendBirdAction';
 import { COLOR_RED, MESSAGE_REQ_ID } from '../const';
 import { MessageDeleteModal } from './MessageDeleteModal';
 import { UserBlockModal } from './UserBlockModal';
 import { Chat } from '../Chat';
+
 
 class Message {
   constructor({ channel, message, widgetContainerEl }) {
@@ -51,26 +52,19 @@ class Message {
     setDataInElement(root, MESSAGE_REQ_ID, this.message.reqId);
 
     const messageContent = createDivEl({ className: styles['message-content'] });
+
+    const avatar = createDivEl({
+      className : styles['message-avatar'],
+      background: avatarFor(this.message.sender)
+    });
+    const messageBody = createDivEl({
+      className : styles['message-body']
+    });
     const nickname = createDivEl({
       className: isCurrentUser ? [styles['message-nickname'], styles['is-user']] : styles['message-nickname'],
       content: `${protectFromXSS(this.message.sender.nickname)} : `
     });
-    nickname.addEventListener('mouseover', () => {
-      this._hoverOnNickname(nickname, true);
-    });
-    nickname.addEventListener('mouseleave', () => {
-      this._hoverOnNickname(nickname, false);
-    });
-    nickname.addEventListener('click', () => {
-      if (!isCurrentUser) {
-        const userBlockModal = new UserBlockModal({ user: this.message.sender, isBlock: true });
-        userBlockModal.render();
-      }
-    });
-    messageContent.appendChild(nickname);
-
     const msg = createDivEl({ className: styles['message-content'], content: protectFromXSS(this.message.message) });
-    messageContent.appendChild(msg);
 
     const time = createDivEl({
       className: isCurrentUser ? [styles.time, styles['is-user']] : styles.time,
@@ -92,13 +86,18 @@ class Message {
         messageDeleteModal.render();
       }
     });
-    messageContent.appendChild(time);
+
+    messageBody.appendChild(nickname);
+    messageBody.appendChild(msg);
+    messageBody.appendChild(time);
+    messageContent.appendChild(avatar);
+    messageContent.appendChild(messageBody);
+
 
     if (this.channel.isGroupChannel()) {
       const count = sendbirdAction.getReadReceipt(this.channel, this.message);
       const read = createDivEl({
         className: count ? [styles.read, styles.active] : styles.read,
-        content: ''
       });
       messageContent.appendChild(read);
     }
@@ -113,22 +112,28 @@ class Message {
     setDataInElement(root, MESSAGE_REQ_ID, this.message.reqId);
 
     const messageContent = createDivEl({ className: styles['message-content'] });
+    const avatar = createDivEl({
+      className : styles['message-avatar'],
+      background: avatarFor(this.message.sender)
+    });
+    const messageBody = createDivEl({
+      className : styles['message-body']
+    });
     const nickname = createDivEl({
       className: sendbirdAction.isCurrentUser(this.message.sender)
         ? [styles['message-nickname'], styles['is-user']]
         : styles['message-nickname'],
       content: `${protectFromXSS(this.message.sender.nickname)} : `
     });
-    messageContent.appendChild(nickname);
+
 
     const msg = createDivEl({
       className: [styles['message-content'], styles['is-file']],
-      content: protectFromXSS(this.message.name)
+      content: `[ ${protectFromXSS(this.message.name)} ]`
     });
     msg.addEventListener('click', () => {
       window.open(this.message.url);
     });
-    messageContent.appendChild(msg);
 
     const time = createDivEl({ className: styles.time, content: timestampToTime(this.message.createdAt) });
     time.addEventListener('mouseover', () => {
@@ -145,13 +150,14 @@ class Message {
       });
       messageDeleteModal.render();
     });
-    messageContent.appendChild(time);
+
+    messageBody.appendChild(nickname);
+
 
     if (this.channel.isGroupChannel()) {
       const count = sendbirdAction.getReadReceipt(this.channel, this.message);
       const read = createDivEl({
         className: count ? [styles.read, styles.active] : styles.read,
-        content: count
       });
       messageContent.appendChild(read);
     }
@@ -170,8 +176,12 @@ class Message {
         Chat.getInstance().main.repositionScroll(imageRender.offsetHeight);
       };
       imageContent.appendChild(imageRender);
-      root.appendChild(imageContent);
+      messageBody.appendChild(imageContent);
     }
+    messageBody.appendChild(msg);
+    messageBody.appendChild(time);
+    messageContent.appendChild(avatar);
+    messageContent.appendChild(messageBody);
 
     return root;
   }

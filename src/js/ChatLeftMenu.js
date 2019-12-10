@@ -1,12 +1,11 @@
 import { LeftListItem } from './components/LeftListItem';
-import { ACTIVE_CLASSNAME, body, DISPLAY_BLOCK, DISPLAY_NONE } from './const';
+import { ACTIVE_CLASSNAME, DISPLAY_BLOCK, DISPLAY_NONE } from './const';
 import { addClass, appendToFirst, errorAlert, isScrollBottom, isUrl, protectFromXSS, removeClass } from './utils';
 import { Spinner } from './components/Spinner';
 import { OpenChannelList } from './components/OpenChannelList';
 import { SendBirdAction } from './SendBirdAction';
 import { UserList } from './components/UserList';
 import { Chat } from './Chat';
-import { OpenChannelCreateModal } from './components/OpenChannelCreateModal';
 
 let instance = null;
 
@@ -36,12 +35,9 @@ class ChatLeftMenu {
     });
   }
 
+
   updateUserInfo(user) {
     const userInfoEl = document.querySelector('#user_info');
-    const profileEl = userInfoEl.querySelectorAll('.image-profile')[0];
-    if (isUrl(user.profileUrl)) {
-      profileEl.setAttribute('src', protectFromXSS(user.profileUrl));
-    }
     const nicknameEl = userInfoEl.querySelectorAll('.nickname-content')[0];
     nicknameEl.innerHTML = protectFromXSS(user.nickname);
   }

@@ -10,9 +10,8 @@
     align-items: center;
     height: 80px;
     box-sizing: border-box;
-    padding: 15px 20px;
+    padding: 30px;
     border: 1px solid transparent;
-    border-bottom: 1px solid $color-chat-border;
     color: $color-black-border;
 
     & > .chat-title {
@@ -23,10 +22,10 @@
       -ms-text-overflow: ellipsis;
       text-overflow: ellipsis;
     }
-    & > .chat-title.is-group {
-      padding-left: 34px;
-      @include icon($ic-group, 27px 27px, 0 center);
-    }
+    // & > .chat-title.is-group {
+    //   padding-left: 34px;
+    //   @include icon($ic-group, 27px 27px, 0 center);
+    // }
 
     & > .chat-button {
       display: flex;

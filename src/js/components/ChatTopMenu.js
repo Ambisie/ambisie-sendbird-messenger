@@ -1,9 +1,11 @@
+import _ from 'lodash';
 import styles from '../../scss/chat-top-menu.scss';
 import { createDivEl, errorAlert, protectFromXSS } from '../utils';
 import { Chat } from '../Chat';
 import { ChatLeftMenu } from '../ChatLeftMenu';
 import { UserList } from './UserList';
 import { SendBirdAction } from '../SendBirdAction';
+import { membersExcludingCurrentUserIn } from '../utils';
 
 class ChatTopMenu {
   constructor(channel) {
@@ -16,10 +18,8 @@ class ChatTopMenu {
     if (isOpenChannel) {
       return `# ${this.channel.name}`;
     } else {
-      return this.channel.members
-        .map(member => {
-          return protectFromXSS(member.nickname);
-        })
+      return membersExcludingCurrentUserIn(this.channel)
+        .map(member => protectFromXSS(member.nickname))
         .join(', ');
     }
   }
@@ -42,19 +42,6 @@ class ChatTopMenu {
         UserList.getInstance().render(true);
       });
       button.appendChild(invite);
-      // const hide = createDivEl({ className: styles['button-hide'] });
-      // hide.addEventListener('click', () => {
-      //   SendBirdAction.getInstance()
-      //     .hide(channel.url)
-      //     .then(() => {
-      //       ChatLeftMenu.getInstance().removeGroupChannelItem(this.channel.url);
-      //       Chat.getInstance().renderEmptyElement();
-      //     })
-      //     .catch(error => {
-      //       errorAlert(error.message);
-      //     });
-      // });
-      // button.appendChild(hide);
     }
     const leave = createDivEl({ className: styles['button-leave'] });
     leave.addEventListener('click', () => {

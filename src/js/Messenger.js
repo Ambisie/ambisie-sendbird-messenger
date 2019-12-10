@@ -8,7 +8,7 @@ import { body, UPDATE_INTERVAL_TIME } from './const';
 import { SendBirdConnection } from './SendBirdConnection';
 import { SendBirdEvent } from './SendBirdEvent';
 import { LeftListItem } from './components/LeftListItem';
-
+import { setAppState } from './AppState';
 
 const view = _.template(`
   <div class="ambisie-sendbird-messenger">
@@ -26,9 +26,6 @@ const view = _.template(`
           </div>
         </div>
         <div class="body-left-bottom" id="user_info">
-          <div class="bottom-profile">
-            <img src="https://dxstmhyqfqr1o.cloudfront.net/web-basic/image-profile.svg" width="30" height="30" class="image-profile">
-          </div>
           <div class="bottom-nickname">
             <div class="nickname-title">username</div>
             <div class="nickname-content"></div>
@@ -40,9 +37,11 @@ const view = _.template(`
   </div>`);
 
 class Messenger {
-  constructor({ sendBirdAppId, userAccessToken, userId, nickname, targetUserId, containerEl }) {
+  constructor({ sendBirdAppId, userAccessToken, userId, nickname, targetUserId, containerEl, placeholderAvatarUrl, noMessagePlaceholder }) {
+    setAppState({ currentUserId: userId, currentUserNickname: nickname, placeholderAvatarUrl, noMessagePlaceholder });
+
     this.containerEl = containerEl;
-    this.containerEl.innerHTML = view({ logoUrl: 'https://www.ambisie.com/images/logo/Logo-White@2x.png' });
+    this.containerEl.innerHTML = view();
 
     this.bodyEl   = this.containerEl.querySelector('.body');
 
@@ -78,7 +77,7 @@ class Messenger {
         }
       })
       .catch((e) => {
-        console.error("ERROR:", e)
+        console.error("ERROR:", e);
         alert('Messenger connection failed.');
       });
   }
