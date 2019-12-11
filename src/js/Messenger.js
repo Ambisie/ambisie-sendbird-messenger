@@ -113,7 +113,7 @@ class Messenger {
     connectionManager.onReconnectFailed = () => {
       console.log('[SendBird JS SDK] Reconnect : Failed');
       connectionManager.remove();
-      alert('Messenger Reconnect Failed...');
+      console.error('Messenger Reconnect Failed...');
     };
   }
 

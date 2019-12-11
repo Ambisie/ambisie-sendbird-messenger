@@ -108,6 +108,7 @@ class ChatBody {
         : '-1';
       const requestItem = this._getItem(requestId, true);
       const existItem = this._getItem(messageItem.element.id, false);
+
       if (requestItem || existItem) {
         this.element.replaceChild(messageItem.element, requestItem ? requestItem : existItem);
       } else {

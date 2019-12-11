@@ -13,11 +13,15 @@ class ChatInput {
   }
 
   _createElement(channel) {
-    const root = createDivEl({ className: styles['chat-input'] });
-    const inputPanel = createDivEl({ className: styles['input-panel'] });
+    const root        = createDivEl({ className: styles['chat-input'] });
+    const inputPanel  = createDivEl({ className: styles['input-panel'] });
+    const buttonPanel = createDivEl({ className: styles['button-panel'] });
+
+    root.appendChild(inputPanel);
+    root.appendChild(buttonPanel);
 
     this.typing = createDivEl({ className: styles['typing-field'] });
-    inputPanel.appendChild(this.typing);
+    buttonPanel.appendChild(this.typing);
 
     const file = document.createElement('label');
     file.className = styles['input-file'];
@@ -76,15 +80,16 @@ class ChatInput {
     inputText.appendChild(this.input);
     inputPanel.appendChild(inputText);
 
+
     const sendButton     = document.createElement('button');
     sendButton.innerHTML = "Send";
     sendButton.className = styles['send-button'];
     sendButton.addEventListener('click', () => {
       this.postMessageFromInput();
     });
+    buttonPanel.appendChild(sendButton);
 
-    root.appendChild(inputPanel);
-    root.appendChild(sendButton);
+
     return root;
   }
 

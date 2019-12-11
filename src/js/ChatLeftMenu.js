@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import { LeftListItem } from './components/LeftListItem';
 import { ACTIVE_CLASSNAME, DISPLAY_BLOCK, DISPLAY_NONE } from './const';
-import { addClass, appendToFirst, errorAlert, isScrollBottom, isUrl, protectFromXSS, removeClass } from './utils';
+import { addClass, appendToFirst, errorAlert, isScrollBottom, isUrl, protectFromXSS, removeClass, hasClass } from './utils';
 import { Spinner } from './components/Spinner';
 import { OpenChannelList } from './components/OpenChannelList';
 import { SendBirdAction } from './SendBirdAction';
@@ -79,11 +80,14 @@ class ChatLeftMenu {
 
   updateItem(channel, isFirst = false) {
     const item = this.getItem(channel.url);
+
     const handler = () => {
       Chat.getInstance().render(channel.url, false);
       ChatLeftMenu.getInstance().activeChannelItem(channel.url);
     };
+
     const newItem = new LeftListItem({ channel, handler });
+
     const parentNode = this.groupChannelList;
     if (isFirst) {
       if (item) {

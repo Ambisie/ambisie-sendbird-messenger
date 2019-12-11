@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { getAppState } from './AppState';
 import SendBird from 'sendbird';
 import {
-  isNull
+  isNull, uuid4
 } from './utils';
 
 let instance = null;
@@ -250,10 +250,11 @@ class SendBirdAction {
 
   createGroupChannel(userIds) {
     return new Promise((resolve, reject) => {
-      const channelSafeUserIds = [ getAppState().currentUserId, ...userIds ].filter(Boolean).map(id => id.replace(/[^a-z,A-Z,0-9,_,-]/g, '-'));
-      let   params             = new this.sb.GroupChannelParams();
+      const channelNameBits = [ getAppState().currentUserId, ...userIds, uuid4() ].filter(Boolean).map(id => id.replace(/[^a-z,A-Z,0-9,_,-]/g, '-'));
+      let   params          = new this.sb.GroupChannelParams();
+
       params.addUserIds(userIds);
-      params.channelUrl = `private-message-users_${channelSafeUserIds.join('_')}`;
+      params.channelUrl = channelNameBits.join('_');
 
       this.sb.GroupChannel.createChannel(params, (groupChannel, error) => {
         error ? reject(error) : resolve(groupChannel);

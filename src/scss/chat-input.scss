@@ -13,22 +13,6 @@
     & > .input-panel {
       display: flex;
 
-      & > .typing-field {
-        display: none;
-        position: absolute;
-        bottom: 79px;
-        left: 220px;
-        width: calc(100vw - 220px - 240px);
-        padding: 6px 20px;
-        box-sizing: border-box;
-        background-color: rgba(0, 0, 0, 0.1);
-        color: $color-black-text;
-        opacity: 0.4;
-        vertical-align: middle;
-        font-size: 13px;
-        font-style: italic;
-      }
-
       & > .input-file {
         display: flex;
         width: 36px;
@@ -48,8 +32,9 @@
       & > .input-text {
         display: flex;
         font-size: 15px;
+        margin-bottom: 10px;
         width: 100%;
-        height: 36px;
+        height: 72px;
         padding: 7px 8px 6px 8px;
         box-sizing: border-box;
         border: 1px solid $color-chat-border;
@@ -78,8 +63,20 @@
       }
     }
 
-    & > .send-button {
-      margin-left: auto;
+    & > .button-panel {
+      display        : flex;
+      justify-content: space-between;
+
+      & > .typing-field {
+        display   : none;
+        font-size : 0.78rem;
+        font-style: italic;
+        padding-left: 36px;
+      }
+
+      & > .send-button {
+        margin-left: auto
+      }
     }
   }
 }
