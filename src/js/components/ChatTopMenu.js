@@ -33,6 +33,13 @@ class ChatTopMenu {
       className: isOpenChannel ? styles['chat-title'] : [styles['chat-title'], styles['is-group']],
       content: this.chatTitle
     });
+    const menuBtn = createDivEl({ className: styles['menu-button'], content: '<' });
+
+    menuBtn.addEventListener('click', () => {
+      ChatLeftMenu.getInstance().show();
+    });
+
+    root.appendChild(menuBtn);
     root.appendChild(this.title);
 
     const button = createDivEl({ className: styles['chat-button'] });

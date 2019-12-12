@@ -8,18 +8,46 @@
   display   : flex;
 
   .body {
+
+    --device-type: desktop;
+
+    @media (max-width: $phone-mode-min-width) {
+      --device-type: phone;
+    }
+
+
     display       : flex;
     flex-direction: row;
     width         : 100%;
     border-top    : 1px solid $color-chat-border;
 
     & > .body-left {
-      display         : flex;
-      flex-direction  : column;
-      justify-content : space-between;
-      width           : 270px;
-      height          : 100%;
-      background-color: $color-primary-dark;
+      display           : flex;
+      flex-direction    : column;
+      justify-content   : space-between;
+      height            : 100%;
+      background-color  : $color-primary-dark;
+      width             : 0px;
+      transition        : width 0.5s ease-out;
+      -webkit-transition: width 0.5s ease-out;
+
+      &.show {
+        border-right      : 1px solid #e0e2e5;
+        width             : 350px;
+      }
+
+      @media (max-width: $phone-mode-min-width) {
+        & {
+          position: absolute;
+          top     : 1px; //border height
+          bottom  : 0;
+          left    : 0;
+
+          &.show {
+            width: 100%;
+          }
+        }
+      }
 
       & > .body-left-list {
         display       : flex;
@@ -127,7 +155,6 @@
       display         : flex;
       flex-direction  : column;
       width           : 100%;
-      min-width       : 500px;
       background-color: $color-white;
     }
   }

@@ -37,6 +37,21 @@ class ChatLeftMenu {
   }
 
 
+  show() {
+    const leftMenuEl = this.bodyEl.querySelector('.body-left');
+    addClass(leftMenuEl, 'show');
+  }
+
+  hide() {
+    const leftMenuEl = this.bodyEl.querySelector('.body-left');
+    removeClass(leftMenuEl, 'show');
+  }
+
+  hasChannels() {
+    const leftMenuEl = this.bodyEl.querySelector('.body-left');
+    return leftMenuEl.querySelectorAll('.list-item').length > 0;
+  }
+
   updateUserInfo(user) {
     const userInfoEl = document.querySelector('#user_info');
     const nicknameEl = userInfoEl.querySelectorAll('.nickname-content')[0];

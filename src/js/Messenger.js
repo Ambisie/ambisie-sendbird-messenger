@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty, addClass, removeClass } from './utils';
+import { isEmpty } from './utils';
 import { SendBirdAction } from './SendBirdAction';
 import { ChatLeftMenu } from './ChatLeftMenu';
 import { Chat } from './Chat';
@@ -36,8 +36,20 @@ const view = _.template(`
     </div>
   </div>`);
 
+let instance = null;
+
 class Messenger {
+
+  static getInstance() {
+    return instance;
+  }
+
   constructor({ sendBirdAppId, userAccessToken, userId, nickname, targetUserId, containerEl, placeholderAvatarUrl, noMessagePlaceholder }) {
+    if (instance) {
+      return instance;
+    }
+
+    instance = this;
     setAppState({ currentUserId: userId, currentUserNickname: nickname, placeholderAvatarUrl, noMessagePlaceholder });
 
     this.containerEl = containerEl;
@@ -50,6 +62,12 @@ class Messenger {
     this.chat     = new Chat(this.bodyEl);
 
     this.connect({ userAccessToken, userId, nickname, targetUserId });
+  }
+
+
+  isPhone() {
+    const type = window.getComputedStyle(this.bodyEl).getPropertyValue('--device-type');
+    return _.trim(type) === 'phone';
   }
 
 
@@ -67,32 +85,27 @@ class Messenger {
         this.createConnectionHandler();
         this.createChannelEvent();
         this.updateGroupChannelTime();
-        this.chatLeft.getGroupChannelList(true).then(() => this.updateLeftMenuVisibility());
+        this.chatLeft.getGroupChannelList(true).then(() => {
+          if(targetUserId) {
+            this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
+              .then((channel) => {
+                this.chat.render(channel.url, false);
+                if(!this.isPhone()) this.chatLeft.show();
 
-        if(targetUserId) {
-          this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
-            .then((channel) => {
-              this.chat.render(channel.url, false);
-              // HACK: allow queued background events to be processed in the event loop
-              _.defer(() => {
-                this.updateLeftMenuVisibility(true);
-                this.chatLeft.activeChannelItem(channel.url);
+                // HACK: allow queued background events to be processed in the event loop
+                _.defer(() => {
+                  this.chatLeft.activeChannelItem(channel.url);
+                });
               });
-            });
-        }
+          } else {
+            if(this.chatLeft.hasChannels()) this.chatLeft.show();
+          }
+        });
       })
       .catch((e) => {
         console.error("ERROR:", e);
         alert('Messenger connection failed.');
       });
-  }
-
-  updateLeftMenuVisibility(forceShow) {
-    const leftMenuEl = this.bodyEl.querySelector('.body-left');
-
-    forceShow || leftMenuEl.querySelectorAll('.list-item').length > 0
-      ? addClass(leftMenuEl, 'show')
-      : removeClass(leftMenuEl, 'show');
   }
 
   createConnectionHandler() {
@@ -144,6 +157,8 @@ class Messenger {
       const item = new LeftListItem({ channel: groupChannel, handler });
       this.chatLeft.addGroupChannelItem(item.element);
       this.chat.updateChatInfo(groupChannel);
+
+      if(this.isPhone()) this.chatLeft.hide();
     };
     channelEvent.onUserLeft = (groupChannel, user) => {
       if (SendBirdAction.getInstance().isCurrentUser(user)) {

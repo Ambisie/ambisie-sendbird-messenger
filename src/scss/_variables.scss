@@ -33,3 +33,16 @@ $color-red: #DC5960 !default;
 $color-chat-border: #e0e2e5 !default;
 $color-chat-select: #f8f9fa !default;
 
+// bootstrap breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+$desktop-mode-min-width       : map-get($grid-breakpoints, "xl");
+$ipad-landscape-mode-min-width: map-get($grid-breakpoints, "lg");
+$ipad-portrait-mode-min-width : map-get($grid-breakpoints, "md");
+$phone-mode-min-width         : map-get($grid-breakpoints, "sm");

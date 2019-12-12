@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import moment from 'moment';
 import { getAppState } from './AppState';
 import { PLACEHOLDER_AVATAR_URL } from './const';

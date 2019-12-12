@@ -14,6 +14,24 @@
     border: 1px solid transparent;
     color: $color-black-border;
 
+    @media (max-width: $phone-mode-min-width) {
+      & {
+        padding: 15px;
+      }
+    }
+
+    & > .menu-button {
+      display     : none;
+      font-size   : 1.4rem;
+      margin-right: 15px;
+
+      @media (max-width: $phone-mode-min-width) {
+        & {
+          display: block
+        }
+      }
+    }
+
     & > .chat-title {
       max-width: 800px;
       font-size: 20px;
@@ -22,10 +40,6 @@
       -ms-text-overflow: ellipsis;
       text-overflow: ellipsis;
     }
-    // & > .chat-title.is-group {
-    //   padding-left: 34px;
-    //   @include icon($ic-group, 27px 27px, 0 center);
-    // }
 
     & > .chat-button {
       display: flex;

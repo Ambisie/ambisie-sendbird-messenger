@@ -7,6 +7,7 @@ import { ChatLeftMenu } from './ChatLeftMenu';
 import { ChatTopMenu } from './components/ChatTopMenu';
 import { ChatMain } from './components/ChatMain';
 import { SendBirdChatEvent } from './SendBirdChatEvent';
+import Messenger from './Messenger';
 
 let instance = null;
 
@@ -146,6 +147,7 @@ class Chat {
   }
 
   render(channelUrl, isOpenChannel = true) {
+    if(Messenger.getInstance().isPhone()) ChatLeftMenu.getInstance().hide();
     return channelUrl ? this._renderChatElement(channelUrl, isOpenChannel) : this.renderEmptyElement();
   }
 
