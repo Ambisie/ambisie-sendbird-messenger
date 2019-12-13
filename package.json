@@ -1,6 +1,6 @@
 {
   "name": "ambisie-messenger",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Ambisie customisation of the SendBird Web Basic Sample",
   "main": "/dist/ambisie-messenger.js",
   "scripts": {
@@ -17,7 +17,8 @@
   "author": "Ambisie & SendBird",
   "license": "ISC",
   "peerDependencies": {
-    "moment": "*"
+    "moment": "*",
+    "lodash": "*"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
