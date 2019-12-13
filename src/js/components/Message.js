@@ -62,7 +62,7 @@ class Message {
     });
     const nickname = createDivEl({
       className: isCurrentUser ? [styles['message-nickname'], styles['is-user']] : styles['message-nickname'],
-      content: `${protectFromXSS(this.message.sender.nickname)} : `
+      content: protectFromXSS(this.message.sender.nickname)
     });
     const msg = createDivEl({ className: styles['message-content'], content: protectFromXSS(this.message.message) });
 
@@ -127,7 +127,7 @@ class Message {
       className: sendbirdAction.isCurrentUser(this.message.sender)
         ? [styles['message-nickname'], styles['is-user']]
         : styles['message-nickname'],
-      content: `${protectFromXSS(this.message.sender.nickname)} : `
+      content: protectFromXSS(this.message.sender.nickname)
     });
 
 
