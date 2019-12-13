@@ -118,6 +118,7 @@ class UserList extends List {
   }
 
   render(isInvite = false) {
+    const targetEl = Chat.getInstance().bodyEl;
     if (!targetEl.querySelector(`.${this.getRootClassName()}`)) {
       this._updateCreateType(isInvite);
       targetEl.appendChild(this.element);

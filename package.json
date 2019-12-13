@@ -16,6 +16,9 @@
   },
   "author": "Ambisie & SendBird",
   "license": "ISC",
+  "peerDependencies": {
+    "moment": "*"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.3",

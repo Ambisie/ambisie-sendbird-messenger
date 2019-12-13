@@ -35,7 +35,9 @@ npm start
 ```
 
 ## Dependencies
-Ensure `lodash` is loading in the relevant env
+Ensure the following are loading in the relevant env:
+* `lodash`
+* `momentjs`
 
 ## Building
 

@@ -10,7 +10,8 @@
     rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="/dist/ambisie-messenger.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.js"></script>
   <script src="/dist/ambisie-messenger.js"></script>
   <title>Widget Housing Page</title>
 </head>
@@ -30,10 +31,11 @@
 
       const messenger = new AmbisieMessenger({
         sendBirdAppId: sendBirdAppId,
-        userId        : fromQS("userid") || 'current-user@ambisie.com',
-        nickname      : fromQS("nickname") || 'Me',
-        targetUserId  : fromQS("targetuserid") || 'john',
-        containerEl   : document.querySelector('#widget')
+        userId         : fromQS("userid") || 'current-user@ambisie.com',
+        userAccessToken: fromQS("usertoken"),
+        nickname       : fromQS("nickname") || 'Me',
+        targetUserId   : fromQS("targetuserid") || 'john',
+        containerEl    : document.querySelector('#widget')
       });
     });
   </script>

@@ -26,6 +26,12 @@ module.exports = () => {
         amd: 'lodash',
         root: '_',
       },
+      moment: {
+        commonjs : 'moment',
+        commonjs2: 'moment',
+        amd      : 'moment',
+        root     : 'moment',
+      }
     },
     devtool: 'cheap-eval-source-map',
     devServer: {
