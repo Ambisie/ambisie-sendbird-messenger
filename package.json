@@ -1,8 +1,8 @@
 {
   "name": "ambisie-messenger",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Ambisie customisation of the SendBird Web Basic Sample",
-  "main": "/dist/ambisie-messenger.js",
+  "main": "dist/ambisie-messenger.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack --mode=development",
     "dev:w": "./node_modules/.bin/webpack --mode=none -w",
