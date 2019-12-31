@@ -3,7 +3,7 @@
 /* global __dirname, process */
 const path              = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const Visualizer        = require('webpack-visualizer-plugin');
 const PRODUCTION = 'production';
 
 module.exports = () => {
@@ -84,7 +84,8 @@ module.exports = () => {
     plugins: [
       new ExtractTextPlugin({
         filename: 'ambisie-[name].css'
-      })
+      }),
+      // new Visualizer({ filename: 'webpack-stats.html'})
     ]
   };
 

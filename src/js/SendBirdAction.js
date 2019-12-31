@@ -225,9 +225,9 @@ class SendBirdAction {
     ));
   }
 
-  findOrCreateGroupChannelWithUsers(userIds) {
+  findOrCreateGroupChannelWithUsers(userIds, channelMetaData) {
     return this.findChannelWithUsers(userIds)
-      .then((channel) => channel || this.createGroupChannel(userIds));
+      .then((channel) => channel || this.createGroupChannel(userIds, channelMetaData));
   }
 
   getGroupChannelList(isInit = false) {
@@ -248,11 +248,12 @@ class SendBirdAction {
     });
   }
 
-  createGroupChannel(userIds) {
+  createGroupChannel(userIds, metaData) {
     return new Promise((resolve, reject) => {
       const channelNameBits = [ getAppState().currentUserId, ...userIds, uuid4() ].filter(Boolean).map(id => id.replace(/[^a-z,A-Z,0-9,_,-]/g, '-'));
       let   params          = new this.sb.GroupChannelParams();
 
+      if(!_.isEmpty(metaData)) params.data = JSON.stringify(metaData);
       params.addUserIds(userIds);
       params.channelUrl = channelNameBits.join('_');
 

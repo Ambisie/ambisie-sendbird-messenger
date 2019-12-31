@@ -44,7 +44,7 @@ class Messenger {
     return instance;
   }
 
-  constructor({ sendBirdAppId, userAccessToken, userId, nickname, targetUserId, containerEl, placeholderAvatarUrl, noMessagePlaceholder }) {
+  constructor({ sendBirdAppId, userAccessToken, userId, nickname, targetUserId, channelMetaData, containerEl, placeholderAvatarUrl, noMessagePlaceholder }) {
     if (instance) {
       return instance;
     }
@@ -61,7 +61,7 @@ class Messenger {
     this.chatLeft = new ChatLeftMenu(this.bodyEl);
     this.chat     = new Chat(this.bodyEl);
 
-    this.connect({ userAccessToken, userId, nickname, targetUserId });
+    this.connect({ userAccessToken, userId, nickname, targetUserId, channelMetaData });
   }
 
 
@@ -71,7 +71,7 @@ class Messenger {
   }
 
 
-  connect({ userAccessToken, userId, nickname, targetUserId }) {
+  connect({ userAccessToken, userId, nickname, targetUserId, channelMetaData }) {
     if (isEmpty(userId) || isEmpty(nickname)) {
       alert('Messenger UserID and Nickname are required.');
     }
@@ -87,7 +87,7 @@ class Messenger {
         this.updateGroupChannelTime();
         this.chatLeft.getGroupChannelList(true).then(() => {
           if(targetUserId) {
-            this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ])
+            this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ], channelMetaData)
               .then((channel) => {
                 this.chat.render(channel.url, false);
                 if(!this.isPhone()) this.chatLeft.show();
@@ -103,8 +103,7 @@ class Messenger {
         });
       })
       .catch((e) => {
-        console.error("ERROR:", e);
-        alert('Messenger connection failed.');
+        console.error("Connection ERROR:", e);
       });
   }
 
