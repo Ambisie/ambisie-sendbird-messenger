@@ -4,7 +4,6 @@
 const path              = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const Visualizer        = require('webpack-visualizer-plugin');
-const PRODUCTION = 'production';
 
 module.exports = () => {
   const config = {
@@ -53,10 +52,10 @@ module.exports = () => {
               {
                 loader: 'css-loader',
                 options: {
-                  module: true,
-                  minimize: process.env.WEBPACK_MODE === PRODUCTION,
-                  // sourceMap: true,
-                  localIdentName: '[local]'
+                  modules: {
+                    localIdentName: '[local]',
+                  },
+                  // sourceMap: true
                 }
               },
               {
