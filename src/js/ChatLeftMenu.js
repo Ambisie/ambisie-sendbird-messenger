@@ -120,6 +120,9 @@ class ChatLeftMenu {
    */
   getGroupChannelList(isInit = false) {
     Spinner.start(this.bodyEl);
+
+    if(isInit) this.clear();
+
     return SendBirdAction.getInstance()
       .getGroupChannelList(isInit)
       .then(groupChannelList => {

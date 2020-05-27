@@ -4,9 +4,11 @@
 @import 'mixins/reset';
 
 @mixin avatar($diameter: 50px) {
-  width          : $diameter;
-  height         : $diameter;
-  border-radius  : 50%;
-  margin-right   : 5px;
-  background-size: cover;
+  min-width          : $diameter;
+  max-width          : $diameter;
+  max-height         : $diameter;
+  border-radius      : 50%;
+  margin-right       : 5px;
+  background-size    : cover;
+  background-position: center;
 }

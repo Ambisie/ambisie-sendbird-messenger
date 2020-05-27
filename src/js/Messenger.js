@@ -50,7 +50,6 @@ class Messenger {
     }
 
     instance = this;
-    setAppState({ currentUserId: userId, currentUserNickname: nickname, placeholderAvatarUrl, noMessagePlaceholder });
 
     this.containerEl = containerEl;
     this.containerEl.innerHTML = view();
@@ -61,7 +60,7 @@ class Messenger {
     this.chatLeft = new ChatLeftMenu(this.bodyEl);
     this.chat     = new Chat(this.bodyEl);
 
-    this.connect({ userAccessToken, userId, nickname, targetUserId, channelMetaData });
+    this.connect({ userAccessToken, userId, nickname, targetUserId, channelMetaData, placeholderAvatarUrl, noMessagePlaceholder });
   }
 
 
@@ -71,12 +70,13 @@ class Messenger {
   }
 
 
-  connect({ userAccessToken, userId, nickname, targetUserId, channelMetaData }) {
+  connect({ userAccessToken, userId, nickname, targetUserId, channelMetaData, placeholderAvatarUrl, noMessagePlaceholder }) {
     if (isEmpty(userId) || isEmpty(nickname)) {
       alert('Messenger UserID and Nickname are required.');
     }
 
     Spinner.start(this.bodyEl);
+    setAppState({ currentUserId: userId, currentUserNickname: nickname, placeholderAvatarUrl, noMessagePlaceholder });
 
     this.sb
       .connect(userId, userAccessToken, nickname)
@@ -85,6 +85,7 @@ class Messenger {
         this.createConnectionHandler();
         this.createChannelEvent();
         this.updateGroupChannelTime();
+        this.chat.renderEmptyElement();
         this.chatLeft.getGroupChannelList(true).then(() => {
           if(targetUserId) {
             this.sb.findOrCreateGroupChannelWithUsers([ targetUserId ], channelMetaData)
@@ -99,6 +100,7 @@ class Messenger {
               });
           } else {
             if(this.chatLeft.hasChannels()) this.chatLeft.show();
+            else this.chatLeft.hide();
           }
         });
       })
