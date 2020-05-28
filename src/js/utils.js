@@ -171,7 +171,6 @@ export const protectFromXSS = text => {
 };
 
 export const membersExcludingCurrentUserIn = (channel) => {
-  debugger
   return channel.members.filter( member => (
     member.userId !== getAppState().currentUserId
   ));
